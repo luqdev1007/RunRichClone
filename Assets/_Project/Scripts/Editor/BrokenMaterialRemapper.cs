@@ -13,13 +13,14 @@ namespace RunRich.Editor
         private const string MenuRoot = "Tools/RunRich/Materials/";
         private const string TargetShaderName = "Universal Render Pipeline/Simple Lit";
         private const string TextureFolder = "Assets/_Project/Art/Visual/Texture2D";
-        private const string PropsMaterialPrefix = "props";
-        private const string PropsAtlasTextureName = "atlas";
+        private const string SharedAtlasTextureName = "atlas";
         private const string ForcedTransparentMaterialName = "Water";
         private const float ForcedTransparentAlpha = 0.74f;
         private const float FallbackCutoff = 0.5f;
 
         private static readonly string[] UiShaderMarkers = { "_ClipRect", "_Stencil" };
+
+        private static readonly string[] SharedAtlasMaterialPrefixes = { "props", "player_mat" };
 
         private static readonly Dictionary<string, string> BaseMapByMaterialName =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -173,8 +174,11 @@ namespace RunRich.Editor
             if (BaseMapByMaterialName.TryGetValue(material.name, out textureName))
                 return LoadTexture(textureName);
 
-            if (material.name.StartsWith(PropsMaterialPrefix, StringComparison.OrdinalIgnoreCase))
-                return LoadTexture(PropsAtlasTextureName);
+            foreach (var prefix in SharedAtlasMaterialPrefixes)
+            {
+                if (material.name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                    return LoadTexture(SharedAtlasTextureName);
+            }
 
             return null;
         }
