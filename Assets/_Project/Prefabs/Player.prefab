@@ -799,6 +799,7 @@ GameObject:
   - component: {fileID: 4883379779036179793}
   - component: {fileID: 8971461211477142290}
   - component: {fileID: 821531288062489090}
+  - component: {fileID: 6515649214032271238}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -866,6 +867,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: RunRich.Runtime::RunRich.Player.PlayerMover
   _road: {fileID: 0}
   _config: {fileID: 11400000, guid: abfa35f4321739d4586b8bfcf53407d5, type: 2}
+--- !u!114 &6515649214032271238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128271100748755419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfde38a833dfcb540a4ac1aeb74260dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.Player.PlayerView
+  _animator: {fileID: 8971461211477142290}
+  _tierConfig: {fileID: 11400000, guid: 81c74877cf1590f478cd847f5e1a4f06, type: 2}
 --- !u!1 &2179005184972872749
 GameObject:
   m_ObjectHideFlags: 0
