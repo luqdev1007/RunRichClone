@@ -985,6 +985,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d581bbb603d9d742bd7a6f908fa9051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: RunRich.Runtime::RunRich.Player.PlayerCharacter
+--- !u!114 &619533700 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2717336825993583205, guid: 4bdfa51945ac48d4a84e6133c35eec6d, type: 3}
+  m_PrefabInstance: {fileID: 619533696}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c216bd6c60711024f9cda2b2d93bf578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.UI.StatusGaugeView
 --- !u!1001 &619873161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1811,6 +1822,9 @@ MonoBehaviour:
   _playerMover: {fileID: 619533697}
   _playerView: {fileID: 619533698}
   _playerCharacter: {fileID: 619533699}
+  _statusGaugeView: {fileID: 619533700}
+  _tierConfig: {fileID: 11400000, guid: 81c74877cf1590f478cd847f5e1a4f06, type: 2}
+  _camera: {fileID: 1747691955}
 --- !u!4 &1204008455
 Transform:
   m_ObjectHideFlags: 0
