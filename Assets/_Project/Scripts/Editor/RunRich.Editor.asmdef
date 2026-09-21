@@ -1,0 +1,21 @@
+{
+    "name": "RunRich.Editor",
+    "rootNamespace": "RunRich.Editor",
+    "references": [
+        "RunRich.Runtime",
+        "ButchersGames",
+        "Unity.Splines",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
