@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using System;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace ButchersGames
         #region Singletone
         private static LevelManager _default;
         public static LevelManager Default { get => _default; }
-        public LevelManager() => _default = this;
+        private void Awake() => _default = this;
         #endregion
 
         const string CurrentLevel_PrefsKey = "Current Level";
@@ -19,7 +21,7 @@ namespace ButchersGames
         const string LastLevelIndex_PrefsKey = "Last Level Index";
         const string CurrentAttempt_PrefsKey = "Current Attempt";
 
-        public static int CurrentLevel { get { return (CompleteLevelCount < Default.Levels.Count ? Default.CurrentLevelIndex : CompleteLevelCount) + 1; } set { PlayerPrefs.GetInt(CurrentLevel_PrefsKey, value); } }
+        public static int CurrentLevel { get { return (CompleteLevelCount < Default.Levels.Count ? Default.CurrentLevelIndex : CompleteLevelCount) + 1; } set { PlayerPrefs.SetInt(CurrentLevel_PrefsKey, value); } }
         public static int CompleteLevelCount { get { return PlayerPrefs.GetInt(CompleteLevelCount_PrefsKey); } set { PlayerPrefs.SetInt(CompleteLevelCount_PrefsKey, value); } }
         public static int LastLevelIndex { get { return PlayerPrefs.GetInt(LastLevelIndex_PrefsKey); } set { PlayerPrefs.SetInt(LastLevelIndex_PrefsKey, value); } }
         public static int CurrentAttempt { get { return PlayerPrefs.GetInt(CurrentAttempt_PrefsKey); } set { PlayerPrefs.SetInt(CurrentAttempt_PrefsKey, value); } }
@@ -138,7 +140,7 @@ namespace ButchersGames
 
         private void ClearChilds()
         {
-            for (int i = 0; i < transform.childCount; i++)
+            for (int i = transform.childCount - 1; i >= 0; i--)
             {
                 GameObject destroyObject = transform.GetChild(i).gameObject;
                 DestroyImmediate(destroyObject);
