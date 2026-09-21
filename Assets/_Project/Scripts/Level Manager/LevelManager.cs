@@ -39,6 +39,12 @@ namespace ButchersGames
 #if !UNITY_EDITOR
             editorMode = false;
 #endif
+            if (levels == null)
+            {
+                Debug.Log("<color=red>There is no levels list attached!</color>");
+                return;
+            }
+
             if (!editorMode) SelectLevel(LastLevelIndex, true);
 
             if (LastLevelIndex != CurrentLevel)
@@ -50,11 +56,15 @@ namespace ButchersGames
         private void OnDestroy()
         {
             LastLevelIndex = CurrentLevelIndex;
+            PlayerPrefs.Save();
+
+            if (_default == this) _default = null;
         }
 
         private void OnApplicationQuit()
         {
             LastLevelIndex = CurrentLevelIndex;
+            PlayerPrefs.Save();
         }
 
 
@@ -70,14 +80,31 @@ namespace ButchersGames
 
         public void NextLevel()
         {
-            if (!editorMode) CurrentLevel++;
+            if (!editorMode)
+            {
+                CompleteLevelCount++;
+                PlayerPrefs.Save();
+            }
+
             SelectLevel(CurrentLevelIndex + 1);
         }
 
         public void SelectLevel(int levelIndex, bool indexCheck = true)
         {
+            if (levels == null)
+            {
+                Debug.Log("<color=red>There is no levels list attached!</color>");
+                return;
+            }
+
             if (indexCheck)
                 levelIndex = GetCorrectedIndex(levelIndex);
+
+            if (levelIndex < 0 || levelIndex >= Levels.Count)
+            {
+                Debug.Log("<color=red>There is no level with index " + levelIndex + "!</color>");
+                return;
+            }
 
             if (Levels[levelIndex] == null)
             {
@@ -103,8 +130,7 @@ namespace ButchersGames
                 return levelIndex > Levels.Count - 1 || levelIndex <= 0 ? 0 : levelIndex;
             else
             {
-                int levelId = CurrentLevel;
-                if (levelId > Levels.Count - 1)
+                if (levelIndex > Levels.Count - 1)
                 {
                     if (levels.randomizedLvls)
                     {
@@ -114,7 +140,8 @@ namespace ButchersGames
                     }
                     else return levelIndex % levels.lvls.Count;
                 }
-                return levelId;
+
+                return levelIndex;
             }
         }
 
