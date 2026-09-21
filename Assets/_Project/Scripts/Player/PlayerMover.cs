@@ -22,6 +22,7 @@ namespace RunRich.Player
 
         public float Distance => _distance;
         public float LateralOffset => _lateralOffset;
+        public Vector3 RoadForward { get; private set; }
 
         public void Construct(IInputService input)
         {
@@ -64,6 +65,7 @@ namespace RunRich.Player
             Vector3 forward = ((Vector3)tangent).normalized;
             Vector3 up = ((Vector3)upVector).normalized;
             Vector3 right = Vector3.Cross(up, forward).normalized;
+            RoadForward = forward;
 
             transform.position = (Vector3)position + right * _lateralOffset;
             transform.rotation = Quaternion.LookRotation(forward, up) * Quaternion.Euler(0f, UpdateYaw(deltaTime), 0f);
