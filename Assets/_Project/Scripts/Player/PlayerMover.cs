@@ -10,6 +10,7 @@ namespace RunRich.Player
     {
         [SerializeField] private SplineContainer _road;
         [SerializeField] private PlayerMovementConfig _config;
+        [SerializeField] private Rigidbody _body;
 
         private IInputService _input;
         private float _splineLength;
@@ -32,6 +33,7 @@ namespace RunRich.Player
         private void Awake()
         {
             _splineLength = _road.Spline.GetLength();
+            _body.sleepThreshold = 0f;
         }
 
         private void Update()

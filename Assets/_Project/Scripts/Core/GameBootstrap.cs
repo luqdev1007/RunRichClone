@@ -8,14 +8,15 @@ namespace RunRich.Core
     {
         [SerializeField] private PlayerMover _playerMover;
         [SerializeField] private PlayerView _playerView;
-
-        public PlayerWallet Wallet { get; private set; }
+        [SerializeField] private PlayerCharacter _playerCharacter;
 
         private void Awake()
         {
-            Wallet = new PlayerWallet();
+            var wallet = new PlayerWallet();
+
             _playerMover.Construct(new PointerSwipeInput());
-            _playerView.Construct(Wallet);
+            _playerView.Construct(wallet);
+            _playerCharacter.Construct(wallet);
         }
     }
 }
