@@ -5,6 +5,7 @@ namespace RunRich.FX
         MoneyBurst,
         MoneyLoss,
         TierUp,
-        WinConfetti
+        WinConfetti,
+        DoorPass
     }
 }

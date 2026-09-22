@@ -30,14 +30,36 @@ namespace RunRich.FX
 
         public void Play(EffectKind kind, Vector3 position, Quaternion rotation)
         {
+            var effect = Take(kind, position, rotation);
+            if (effect != null)
+                effect.Play(true);
+        }
+
+        public void Play(EffectKind kind, Vector3 position, Quaternion rotation, Color color)
+        {
+            var effect = Take(kind, position, rotation);
+            if (effect == null)
+                return;
+
+            foreach (var system in effect.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                var main = system.main;
+                main.startColor = color;
+            }
+
+            effect.Play(true);
+        }
+
+        private ParticleSystem Take(EffectKind kind, Vector3 position, Quaternion rotation)
+        {
             ObjectPool<ParticleSystem> pool;
             if (!_pools.TryGetValue(kind, out pool))
-                return;
+                return null;
 
             var effect = pool.Get();
             effect.transform.SetPositionAndRotation(position, rotation);
-            effect.Play(true);
             StartCoroutine(ReleaseWhenFinished(pool, effect));
+            return effect;
         }
 
         private void OnDestroy()

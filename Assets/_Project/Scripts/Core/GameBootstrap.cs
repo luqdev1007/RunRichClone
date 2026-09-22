@@ -88,7 +88,8 @@ namespace RunRich.Core
 
             _effectService.Construct(_effectConfig);
             _levelEffectPresenter = new LevelEffectPresenter(
-                wallet, _gameState, _playerView, _effectAnchor, _effectService);
+                wallet, _gameState, _playerView, _effectAnchor,
+                level.FinishTrack.Doors, _effectService);
 
             if (_playgroundProbe != null)
                 _playgroundProbe.Construct(wallet, _gameLoop, _gameState);

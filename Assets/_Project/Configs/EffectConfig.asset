@@ -25,3 +25,6 @@ MonoBehaviour:
   - _kind: 3
     _prefab: {fileID: 5720258080426472436, guid: c1966579070452c41a33eb87515c99da, type: 3}
     _poolSize: 1
+  - _kind: 4
+    _prefab: {fileID: 8888586051430585956, guid: ebfa575b87eccc048aa026c5574c6a98, type: 3}
+    _poolSize: 2
