@@ -1,5 +1,4 @@
 using System;
-using ButchersGames;
 using RunRich.Core;
 
 namespace RunRich.UI
@@ -8,12 +7,15 @@ namespace RunRich.UI
     {
         private readonly GameStateMachine _machine;
         private readonly GameLoopController _loop;
+        private readonly LevelFlow _levelFlow;
         private readonly WinScreenView _view;
 
-        public WinScreenPresenter(GameStateMachine machine, GameLoopController loop, WinScreenView view)
+        public WinScreenPresenter(GameStateMachine machine, GameLoopController loop,
+            LevelFlow levelFlow, WinScreenView view)
         {
             _machine = machine;
             _loop = loop;
+            _levelFlow = levelFlow;
             _view = view;
 
             _view.Hide();
@@ -37,7 +39,7 @@ namespace RunRich.UI
 
         private void OnCollected()
         {
-            LevelManager.Default.NextLevel();
+            _levelFlow.Next();
         }
     }
 }

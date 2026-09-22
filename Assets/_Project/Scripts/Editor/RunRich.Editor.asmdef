@@ -5,6 +5,7 @@
         "RunRich.Runtime",
         "ButchersGames",
         "Unity.Splines",
+        "Unity.Mathematics",
         "Unity.TextMeshPro"
     ],
     "includePlatforms": [

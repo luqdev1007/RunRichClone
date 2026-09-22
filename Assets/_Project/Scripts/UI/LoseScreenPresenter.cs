@@ -1,5 +1,4 @@
 using System;
-using ButchersGames;
 using RunRich.Core;
 
 namespace RunRich.UI
@@ -7,11 +6,13 @@ namespace RunRich.UI
     public sealed class LoseScreenPresenter : IDisposable
     {
         private readonly GameStateMachine _machine;
+        private readonly LevelFlow _levelFlow;
         private readonly LoseScreenView _view;
 
-        public LoseScreenPresenter(GameStateMachine machine, LoseScreenView view)
+        public LoseScreenPresenter(GameStateMachine machine, LevelFlow levelFlow, LoseScreenView view)
         {
             _machine = machine;
+            _levelFlow = levelFlow;
             _view = view;
 
             _view.Hide();
@@ -35,7 +36,7 @@ namespace RunRich.UI
 
         private void OnRetryRequested()
         {
-            LevelManager.Default.RestartLevel();
+            _levelFlow.Restart();
         }
     }
 }

@@ -8,10 +8,10 @@ namespace RunRich.Player
 {
     public sealed class PlayerMover : MonoBehaviour
     {
-        [SerializeField] private SplineContainer _road;
         [SerializeField] private PlayerMovementConfig _config;
         [SerializeField] private Rigidbody _body;
 
+        private SplineContainer _road;
         private IInputService _input;
         private float _splineLength;
         private float _distance;
@@ -25,9 +25,11 @@ namespace RunRich.Player
         public float LateralOffset => _lateralOffset;
         public Vector3 RoadForward { get; private set; }
 
-        public void Construct(IInputService input)
+        public void Construct(IInputService input, SplineContainer road)
         {
             _input = input;
+            _road = road;
+            _splineLength = _road.Spline.GetLength();
         }
 
         public void SetRunning(bool running)
@@ -37,7 +39,6 @@ namespace RunRich.Player
 
         private void Awake()
         {
-            _splineLength = _road.Spline.GetLength();
             _body.sleepThreshold = 0f;
         }
 

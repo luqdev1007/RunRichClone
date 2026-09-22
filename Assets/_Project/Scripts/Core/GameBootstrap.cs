@@ -1,3 +1,4 @@
+using ButchersGames;
 using RunRich.Configs;
 using RunRich.FX;
 using RunRich.Input;
@@ -23,7 +24,7 @@ namespace RunRich.Core
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
         [SerializeField] private Camera _camera;
         [SerializeField] private int _startingMoney = 40;
-        [SerializeField] private FinishTrack _finishTrack;
+        [SerializeField] private LevelManager _levelManager;
         [SerializeField] private PlaygroundGameLoopProbe _playgroundProbe;
 
         private StatusGaugePresenter _statusGaugePresenter;
@@ -38,10 +39,16 @@ namespace RunRich.Core
 
         private void Awake()
         {
+            _levelManager.Init();
+            var level = _levelManager.GetComponentInChildren<LevelSetup>();
+
             var wallet = new PlayerWallet(_startingMoney);
             var input = new PointerSwipeInput();
 
-            _playerMover.Construct(input);
+            _playerCharacter.transform.SetPositionAndRotation(
+                level.PlayerSpawn.position, level.PlayerSpawn.rotation);
+
+            _playerMover.Construct(input, level.Road);
             _startScreenView.Construct(input);
             _playerView.Construct(wallet);
             _playerCharacter.Construct(wallet);
@@ -52,16 +59,18 @@ namespace RunRich.Core
             _moneyPopupAccumulator = new MoneyPopupAccumulator(wallet, _moneyPopupConfig.IdlePause);
             _moneyPopupPresenter = new MoneyPopupPresenter(_moneyPopupAccumulator, _moneyPopupConfig, _moneyPopupView);
 
+            var levelFlow = new LevelFlow(_levelManager);
+
             _gameState = new GameStateMachine();
             _gameLoop = new GameLoopController(_gameState, wallet, _playerMover, _playerView);
 
             _statusGaugePresenter = new StatusGaugePresenter(wallet, _tierConfig, _gameState, _statusGaugeView);
             _hudPresenter = new HudPresenter(wallet, _gameState, _hudView);
-            _winScreenPresenter = new WinScreenPresenter(_gameState, _gameLoop, _winScreenView);
-            _loseScreenPresenter = new LoseScreenPresenter(_gameState, _loseScreenView);
+            _winScreenPresenter = new WinScreenPresenter(_gameState, _gameLoop, levelFlow, _winScreenView);
+            _loseScreenPresenter = new LoseScreenPresenter(_gameState, levelFlow, _loseScreenView);
             _startScreenPresenter = new StartScreenPresenter(_gameState, _gameLoop, _startScreenView);
 
-            _finishTrack.Construct(wallet, _gameLoop);
+            level.FinishTrack.Construct(wallet, _gameLoop);
 
             if (_playgroundProbe != null)
                 _playgroundProbe.Construct(wallet, _gameLoop, _gameState);
