@@ -1,6 +1,7 @@
 using RunRich.Configs;
 using RunRich.FX;
 using RunRich.Input;
+using RunRich.Level;
 using RunRich.Player;
 using RunRich.UI;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace RunRich.Core
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
         [SerializeField] private Camera _camera;
         [SerializeField] private int _startingMoney = 40;
+        [SerializeField] private FinishTrack _finishTrack;
         [SerializeField] private PlaygroundGameLoopProbe _playgroundProbe;
 
         private StatusGaugePresenter _statusGaugePresenter;
@@ -43,6 +45,8 @@ namespace RunRich.Core
 
             _gameState = new GameStateMachine();
             _gameLoop = new GameLoopController(_gameState, wallet, _playerMover, _playerView);
+
+            _finishTrack.Construct(wallet, _gameLoop);
 
             if (_playgroundProbe != null)
                 _playgroundProbe.Construct(wallet, _gameLoop, _gameState);

@@ -7,6 +7,7 @@ namespace RunRich.Core
     public sealed class PlaygroundGameLoopProbe : MonoBehaviour
     {
         private const int LosePenalty = -1000;
+        private const int ProbeMultiplier = 1;
 
         private PlayerWallet _wallet;
         private GameLoopController _loop;
@@ -37,7 +38,7 @@ namespace RunRich.Core
                 _wallet.AddMoney(LosePenalty);
 
             if (keyboard.fKey.wasPressedThisFrame)
-                _loop.Finish();
+                _loop.Finish(new FinishResult(_wallet.Money, ProbeMultiplier));
 
             if (keyboard.wKey.wasPressedThisFrame)
                 _loop.Win();

@@ -23,6 +23,8 @@ namespace RunRich.Core
             ApplyState(_machine.Current);
         }
 
+        public FinishResult Result { get; private set; }
+
         public void StartRun()
         {
             if (_machine.Current != GameState.Menu)
@@ -31,11 +33,12 @@ namespace RunRich.Core
             _machine.SetState(GameState.Playing);
         }
 
-        public void Finish()
+        public void Finish(FinishResult result)
         {
             if (_machine.Current != GameState.Playing)
                 return;
 
+            Result = result;
             _machine.SetState(GameState.Finish);
         }
 
