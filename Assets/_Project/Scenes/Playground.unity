@@ -2921,6 +2921,7 @@ MonoBehaviour:
   _hudView: {fileID: 158065076}
   _winScreenView: {fileID: 1620589913}
   _loseScreenView: {fileID: 1620589912}
+  _startScreenView: {fileID: 1620589914}
   _tierConfig: {fileID: 11400000, guid: 81c74877cf1590f478cd847f5e1a4f06, type: 2}
   _moneyPopupConfig: {fileID: 11400000, guid: 9f500b157c3d01548a7442c563a8e59b, type: 2}
   _camera: {fileID: 1747691955}
@@ -3933,6 +3934,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c71eb766b2d41094fae93152b53a384d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: RunRich.Runtime::RunRich.UI.WinScreenView
+--- !u!114 &1620589914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2110036577776379567, guid: bf3f3ddbb40ab244ab6632c6a2d0f987, type: 3}
+  m_PrefabInstance: {fileID: 1620589911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd36373c4f4c9944aef5a6366f3327f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.UI.StartScreenView
 --- !u!1001 &1637327506
 PrefabInstance:
   m_ObjectHideFlags: 0

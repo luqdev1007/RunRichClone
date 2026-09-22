@@ -17,6 +17,11 @@ namespace RunRich.UI
             _camera = camera;
         }
 
+        public void SetVisible(bool visible)
+        {
+            _billboard.gameObject.SetActive(visible);
+        }
+
         public void Show(string title, Color color, float progress)
         {
             _title.text = title;

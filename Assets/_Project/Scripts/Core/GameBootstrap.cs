@@ -18,6 +18,7 @@ namespace RunRich.Core
         [SerializeField] private HudView _hudView;
         [SerializeField] private WinScreenView _winScreenView;
         [SerializeField] private LoseScreenView _loseScreenView;
+        [SerializeField] private StartScreenView _startScreenView;
         [SerializeField] private WealthTierConfig _tierConfig;
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
         [SerializeField] private Camera _camera;
@@ -29,6 +30,7 @@ namespace RunRich.Core
         private HudPresenter _hudPresenter;
         private WinScreenPresenter _winScreenPresenter;
         private LoseScreenPresenter _loseScreenPresenter;
+        private StartScreenPresenter _startScreenPresenter;
         private MoneyPopupAccumulator _moneyPopupAccumulator;
         private MoneyPopupPresenter _moneyPopupPresenter;
         private GameStateMachine _gameState;
@@ -37,13 +39,14 @@ namespace RunRich.Core
         private void Awake()
         {
             var wallet = new PlayerWallet(_startingMoney);
+            var input = new PointerSwipeInput();
 
-            _playerMover.Construct(new PointerSwipeInput());
+            _playerMover.Construct(input);
+            _startScreenView.Construct(input);
             _playerView.Construct(wallet);
             _playerCharacter.Construct(wallet);
 
             _statusGaugeView.Construct(_camera);
-            _statusGaugePresenter = new StatusGaugePresenter(wallet, _tierConfig, _statusGaugeView);
 
             _moneyPopupView.Construct(_camera, _moneyPopupConfig);
             _moneyPopupAccumulator = new MoneyPopupAccumulator(wallet, _moneyPopupConfig.IdlePause);
@@ -52,16 +55,16 @@ namespace RunRich.Core
             _gameState = new GameStateMachine();
             _gameLoop = new GameLoopController(_gameState, wallet, _playerMover, _playerView);
 
+            _statusGaugePresenter = new StatusGaugePresenter(wallet, _tierConfig, _gameState, _statusGaugeView);
             _hudPresenter = new HudPresenter(wallet, _gameState, _hudView);
             _winScreenPresenter = new WinScreenPresenter(_gameState, _gameLoop, _winScreenView);
             _loseScreenPresenter = new LoseScreenPresenter(_gameState, _loseScreenView);
+            _startScreenPresenter = new StartScreenPresenter(_gameState, _gameLoop, _startScreenView);
 
             _finishTrack.Construct(wallet, _gameLoop);
 
             if (_playgroundProbe != null)
                 _playgroundProbe.Construct(wallet, _gameLoop, _gameState);
-
-            _gameLoop.StartRun();
         }
 
         private void OnDestroy()
@@ -70,6 +73,7 @@ namespace RunRich.Core
             _hudPresenter?.Dispose();
             _winScreenPresenter?.Dispose();
             _loseScreenPresenter?.Dispose();
+            _startScreenPresenter?.Dispose();
             _moneyPopupPresenter?.Dispose();
             _moneyPopupAccumulator?.Dispose();
             _gameLoop?.Dispose();

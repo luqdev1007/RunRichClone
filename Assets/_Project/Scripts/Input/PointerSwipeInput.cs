@@ -16,5 +16,14 @@ namespace RunRich.Input
                 return pointer.delta.ReadValue().x / Screen.width;
             }
         }
+
+        public bool PressedThisFrame
+        {
+            get
+            {
+                var pointer = Pointer.current;
+                return pointer != null && pointer.press.wasPressedThisFrame;
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ namespace RunRich.UI
             _machine.Changed += OnStateChanged;
 
             _view.Show(_wallet.Money);
-            _view.SetMoneyVisible(_machine.Current == GameState.Playing);
+            _view.SetRunning(_machine.Current == GameState.Playing);
         }
 
         public void Dispose()
@@ -31,7 +31,7 @@ namespace RunRich.UI
 
         private void OnStateChanged(GameState state)
         {
-            _view.SetMoneyVisible(state == GameState.Playing);
+            _view.SetRunning(state == GameState.Playing);
         }
 
         private void OnMoneyChanged(MoneyChange change)
