@@ -747,6 +747,9 @@ MonoBehaviour:
   _tierConfig: {fileID: 11400000, guid: 81c74877cf1590f478cd847f5e1a4f06, type: 2}
   _moneyPopupConfig: {fileID: 11400000, guid: 9f500b157c3d01548a7442c563a8e59b, type: 2}
   _soundConfig: {fileID: 11400000, guid: 93af8171b822961468c7ec9f2d4535be, type: 2}
+  _effectConfig: {fileID: 11400000, guid: 11128ba2ebd368c468f1fc29c7e5f232, type: 2}
+  _effectService: {fileID: 1554780253}
+  _effectAnchor: {fileID: 1919268958}
   _audioService: {fileID: 1180159289}
   _footstepPlayer: {fileID: 2134190180}
   _camera: {fileID: 1747691955}
@@ -883,6 +886,50 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453066037}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1554780252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1554780254}
+  - component: {fileID: 1554780253}
+  m_Layer: 0
+  m_Name: EffectService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1554780253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554780252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c8196d0a50e504085a1be7fd3f23b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.FX.EffectService
+--- !u!4 &1554780254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554780252}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1237,6 +1284,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!4 &1919268958 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9017927011736919777, guid: 4bdfa51945ac48d4a84e6133c35eec6d, type: 3}
+  m_PrefabInstance: {fileID: 619533696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2134190180 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3433587059642546796, guid: 4bdfa51945ac48d4a84e6133c35eec6d, type: 3}
@@ -1264,3 +1316,4 @@ SceneRoots:
   - {fileID: 815134569}
   - {fileID: 1620589911}
   - {fileID: 1180159290}
+  - {fileID: 1554780254}

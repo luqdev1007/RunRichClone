@@ -23,6 +23,9 @@ namespace RunRich.Core
         [SerializeField] private WealthTierConfig _tierConfig;
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
         [SerializeField] private SoundConfig _soundConfig;
+        [SerializeField] private EffectConfig _effectConfig;
+        [SerializeField] private EffectService _effectService;
+        [SerializeField] private Transform _effectAnchor;
         [SerializeField] private AudioService _audioService;
         [SerializeField] private FootstepPlayer _footstepPlayer;
         [SerializeField] private Camera _camera;
@@ -37,6 +40,7 @@ namespace RunRich.Core
         private StartScreenPresenter _startScreenPresenter;
         private GameSoundPresenter _gameSoundPresenter;
         private LevelSoundPresenter _levelSoundPresenter;
+        private LevelEffectPresenter _levelEffectPresenter;
         private MoneyPopupAccumulator _moneyPopupAccumulator;
         private MoneyPopupPresenter _moneyPopupPresenter;
         private GameStateMachine _gameState;
@@ -82,6 +86,10 @@ namespace RunRich.Core
                 level.Gates, level.FinishTrack.Doors, _audioService, _soundConfig);
             _footstepPlayer.Construct(_playerMover, _playerView, _audioService, _soundConfig);
 
+            _effectService.Construct(_effectConfig);
+            _levelEffectPresenter = new LevelEffectPresenter(
+                wallet, _gameState, _playerView, _effectAnchor, _effectService);
+
             if (_playgroundProbe != null)
                 _playgroundProbe.Construct(wallet, _gameLoop, _gameState);
         }
@@ -95,6 +103,7 @@ namespace RunRich.Core
             _startScreenPresenter?.Dispose();
             _gameSoundPresenter?.Dispose();
             _levelSoundPresenter?.Dispose();
+            _levelEffectPresenter?.Dispose();
             _moneyPopupPresenter?.Dispose();
             _moneyPopupAccumulator?.Dispose();
             _gameLoop?.Dispose();

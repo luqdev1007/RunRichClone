@@ -1,3 +1,4 @@
+using System;
 using RunRich.Configs;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ namespace RunRich.Player
         private SkinnedMeshRenderer[] _outfits;
         private PlayerWallet _wallet;
         private WealthTier _currentTier;
+
+        public event Action TierChanged;
 
         public int CurrentGaitId => _currentTier == null ? 0 : _currentTier.GaitId;
 
@@ -60,8 +63,11 @@ namespace RunRich.Player
             ShowOutfit(tier.OutfitMesh);
             _animator.SetInteger(GaitHash, tier.GaitId);
 
-            if (isChange)
-                _animator.SetTrigger(SpinHash);
+            if (!isChange)
+                return;
+
+            _animator.SetTrigger(SpinHash);
+            TierChanged?.Invoke();
         }
 
         private void ShowOutfit(Mesh outfitMesh)
