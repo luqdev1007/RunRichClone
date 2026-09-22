@@ -16,6 +16,8 @@ namespace RunRich.Core
         [SerializeField] private StatusGaugeView _statusGaugeView;
         [SerializeField] private MoneyPopupView _moneyPopupView;
         [SerializeField] private HudView _hudView;
+        [SerializeField] private WinScreenView _winScreenView;
+        [SerializeField] private LoseScreenView _loseScreenView;
         [SerializeField] private WealthTierConfig _tierConfig;
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
         [SerializeField] private Camera _camera;
@@ -25,6 +27,8 @@ namespace RunRich.Core
 
         private StatusGaugePresenter _statusGaugePresenter;
         private HudPresenter _hudPresenter;
+        private WinScreenPresenter _winScreenPresenter;
+        private LoseScreenPresenter _loseScreenPresenter;
         private MoneyPopupAccumulator _moneyPopupAccumulator;
         private MoneyPopupPresenter _moneyPopupPresenter;
         private GameStateMachine _gameState;
@@ -45,10 +49,12 @@ namespace RunRich.Core
             _moneyPopupAccumulator = new MoneyPopupAccumulator(wallet, _moneyPopupConfig.IdlePause);
             _moneyPopupPresenter = new MoneyPopupPresenter(_moneyPopupAccumulator, _moneyPopupConfig, _moneyPopupView);
 
-            _hudPresenter = new HudPresenter(wallet, _hudView);
-
             _gameState = new GameStateMachine();
             _gameLoop = new GameLoopController(_gameState, wallet, _playerMover, _playerView);
+
+            _hudPresenter = new HudPresenter(wallet, _gameState, _hudView);
+            _winScreenPresenter = new WinScreenPresenter(_gameState, _gameLoop, _winScreenView);
+            _loseScreenPresenter = new LoseScreenPresenter(_gameState, _loseScreenView);
 
             _finishTrack.Construct(wallet, _gameLoop);
 
@@ -62,6 +68,8 @@ namespace RunRich.Core
         {
             _statusGaugePresenter?.Dispose();
             _hudPresenter?.Dispose();
+            _winScreenPresenter?.Dispose();
+            _loseScreenPresenter?.Dispose();
             _moneyPopupPresenter?.Dispose();
             _moneyPopupAccumulator?.Dispose();
             _gameLoop?.Dispose();

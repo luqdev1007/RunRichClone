@@ -11,5 +11,10 @@ namespace RunRich.UI
         {
             _money.text = money.ToString();
         }
+
+        public void SetMoneyVisible(bool visible)
+        {
+            _money.gameObject.SetActive(visible);
+        }
     }
 }
