@@ -24,9 +24,13 @@ namespace RunRich.Editor
         }
 
         [MenuItem(MenuPath)]
-        private static void Bake()
+        private static void BakeSelected()
         {
-            var container = Selection.activeGameObject.GetComponent<SplineContainer>();
+            Bake(Selection.activeGameObject.GetComponent<SplineContainer>());
+        }
+
+        public static void Bake(SplineContainer container)
+        {
             var mesh = Build(container.Spline);
 
             if (!AssetDatabase.IsValidFolder(OutputFolder))
@@ -53,7 +57,7 @@ namespace RunRich.Editor
             Debug.Log("Road mesh baked: " + path + ", vertices " + mesh.vertexCount);
         }
 
-        private static Mesh Build(Spline spline)
+        public static Mesh Build(Spline spline)
         {
             float length = spline.GetLength();
             int segments = Mathf.Max(1, Mathf.CeilToInt(length / SampleStep));
