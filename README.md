@@ -126,4 +126,4 @@ DI-контейнера и без новых синглтонов. Сам уро
 
 ## Видео геймплея
 
-[ССЫЛКА]
+https://drive.google.com/file/d/1wEL-0w8dL2XMqbtJnaMVtLkuJpCAkUif/view?usp=sharing
