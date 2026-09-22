@@ -46,7 +46,7 @@ namespace RunRich.Core
 
         private void OnStateChanged(GameState state)
         {
-            Debug.Log($"[GameLoop] {state}, money {_wallet.Money}");
+            Debug.Log($"[GameLoop] {state}");
         }
     }
 }

@@ -15,6 +15,7 @@ namespace RunRich.Core
         [SerializeField] private PlayerCharacter _playerCharacter;
         [SerializeField] private StatusGaugeView _statusGaugeView;
         [SerializeField] private MoneyPopupView _moneyPopupView;
+        [SerializeField] private HudView _hudView;
         [SerializeField] private WealthTierConfig _tierConfig;
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
         [SerializeField] private Camera _camera;
@@ -23,6 +24,7 @@ namespace RunRich.Core
         [SerializeField] private PlaygroundGameLoopProbe _playgroundProbe;
 
         private StatusGaugePresenter _statusGaugePresenter;
+        private HudPresenter _hudPresenter;
         private MoneyPopupAccumulator _moneyPopupAccumulator;
         private MoneyPopupPresenter _moneyPopupPresenter;
         private GameStateMachine _gameState;
@@ -43,6 +45,8 @@ namespace RunRich.Core
             _moneyPopupAccumulator = new MoneyPopupAccumulator(wallet, _moneyPopupConfig.IdlePause);
             _moneyPopupPresenter = new MoneyPopupPresenter(_moneyPopupAccumulator, _moneyPopupConfig, _moneyPopupView);
 
+            _hudPresenter = new HudPresenter(wallet, _hudView);
+
             _gameState = new GameStateMachine();
             _gameLoop = new GameLoopController(_gameState, wallet, _playerMover, _playerView);
 
@@ -57,6 +61,7 @@ namespace RunRich.Core
         private void OnDestroy()
         {
             _statusGaugePresenter?.Dispose();
+            _hudPresenter?.Dispose();
             _moneyPopupPresenter?.Dispose();
             _moneyPopupAccumulator?.Dispose();
             _gameLoop?.Dispose();
