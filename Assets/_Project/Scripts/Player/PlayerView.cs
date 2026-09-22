@@ -6,6 +6,8 @@ namespace RunRich.Player
     public sealed class PlayerView : MonoBehaviour
     {
         private const string GaitParameter = "Gait";
+        private const float NormalAnimationSpeed = 1f;
+        private const float FrozenAnimationSpeed = 0f;
 
         private static readonly int GaitHash = Animator.StringToHash(GaitParameter);
 
@@ -24,6 +26,11 @@ namespace RunRich.Player
             _wallet = wallet;
             _wallet.Changed += OnMoneyChanged;
             ApplyTier(_wallet.Money);
+        }
+
+        public void SetMoving(bool moving)
+        {
+            _animator.speed = moving ? NormalAnimationSpeed : FrozenAnimationSpeed;
         }
 
         private void OnDestroy()

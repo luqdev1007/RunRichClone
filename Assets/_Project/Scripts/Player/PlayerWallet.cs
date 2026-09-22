@@ -4,6 +4,11 @@ namespace RunRich.Player
 {
     public sealed class PlayerWallet
     {
+        public PlayerWallet(int startingMoney)
+        {
+            Money = startingMoney;
+        }
+
         public int Money { get; private set; }
 
         public event Action<MoneyChange> Changed;

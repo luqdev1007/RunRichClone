@@ -30,6 +30,11 @@ namespace RunRich.Player
             _input = input;
         }
 
+        public void SetRunning(bool running)
+        {
+            enabled = running;
+        }
+
         private void Awake()
         {
             _splineLength = _road.Spline.GetLength();
