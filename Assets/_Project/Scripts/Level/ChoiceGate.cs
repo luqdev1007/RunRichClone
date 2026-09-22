@@ -1,3 +1,4 @@
+using System;
 using RunRich.Player;
 using UnityEngine;
 
@@ -9,6 +10,10 @@ namespace RunRich.Level
 
         private bool _used;
 
+        public event Action<ChoiceGate> Used;
+
+        public int Reward => _reward;
+
         protected override void Trigger(PlayerWallet wallet)
         {
             if (_used)
@@ -16,6 +21,7 @@ namespace RunRich.Level
 
             _used = true;
             wallet.AddMoney(_reward);
+            Used?.Invoke(this);
         }
     }
 }

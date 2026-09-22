@@ -1006,6 +1006,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: RunRich.Runtime::RunRich.Level.LevelSetup
   _road: {fileID: 8617052768025554751}
   _finishTrack: {fileID: 2369408598468104975}
+  _gates:
+  - {fileID: 3679222742598747945}
+  - {fileID: 1694751607102294963}
   _playerSpawn: {fileID: 4682017773057405512}
 --- !u!1 &9160464999044174558
 GameObject:
@@ -1325,6 +1328,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52f5c21130edb464ab5c915b1314f5dd, type: 3}
+--- !u!114 &1694751607102294963 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2012112242369348727, guid: 52f5c21130edb464ab5c915b1314f5dd, type: 3}
+  m_PrefabInstance: {fileID: 894108527654145988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f161c941f66089428ba0df7f8a57825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.Level.ChoiceGate
 --- !u!4 &3762514483496642362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4062141358258612478, guid: 52f5c21130edb464ab5c915b1314f5dd, type: 3}
@@ -1850,6 +1864,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4062141358258612478, guid: 52f5c21130edb464ab5c915b1314f5dd, type: 3}
   m_PrefabInstance: {fileID: 2946283222964683614}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3679222742598747945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2012112242369348727, guid: 52f5c21130edb464ab5c915b1314f5dd, type: 3}
+  m_PrefabInstance: {fileID: 2946283222964683614}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f161c941f66089428ba0df7f8a57825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.Level.ChoiceGate
 --- !u!1001 &3122566185066029221
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,6 +22,9 @@ namespace RunRich.Core
         [SerializeField] private StartScreenView _startScreenView;
         [SerializeField] private WealthTierConfig _tierConfig;
         [SerializeField] private MoneyPopupConfig _moneyPopupConfig;
+        [SerializeField] private SoundConfig _soundConfig;
+        [SerializeField] private AudioService _audioService;
+        [SerializeField] private FootstepPlayer _footstepPlayer;
         [SerializeField] private Camera _camera;
         [SerializeField] private int _startingMoney = 40;
         [SerializeField] private LevelManager _levelManager;
@@ -32,6 +35,8 @@ namespace RunRich.Core
         private WinScreenPresenter _winScreenPresenter;
         private LoseScreenPresenter _loseScreenPresenter;
         private StartScreenPresenter _startScreenPresenter;
+        private GameSoundPresenter _gameSoundPresenter;
+        private LevelSoundPresenter _levelSoundPresenter;
         private MoneyPopupAccumulator _moneyPopupAccumulator;
         private MoneyPopupPresenter _moneyPopupPresenter;
         private GameStateMachine _gameState;
@@ -72,6 +77,11 @@ namespace RunRich.Core
 
             level.FinishTrack.Construct(wallet, _gameLoop);
 
+            _gameSoundPresenter = new GameSoundPresenter(wallet, _gameState, _audioService, _soundConfig);
+            _levelSoundPresenter = new LevelSoundPresenter(
+                level.Gates, level.FinishTrack.Doors, _audioService, _soundConfig);
+            _footstepPlayer.Construct(_playerMover, _playerView, _audioService, _soundConfig);
+
             if (_playgroundProbe != null)
                 _playgroundProbe.Construct(wallet, _gameLoop, _gameState);
         }
@@ -83,6 +93,8 @@ namespace RunRich.Core
             _winScreenPresenter?.Dispose();
             _loseScreenPresenter?.Dispose();
             _startScreenPresenter?.Dispose();
+            _gameSoundPresenter?.Dispose();
+            _levelSoundPresenter?.Dispose();
             _moneyPopupPresenter?.Dispose();
             _moneyPopupAccumulator?.Dispose();
             _gameLoop?.Dispose();

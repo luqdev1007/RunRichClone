@@ -10,6 +10,8 @@ namespace RunRich.Level
 
         [SerializeField] private FinishDoor[] _doors;
 
+        public FinishDoor[] Doors => _doors;
+
         private PlayerWallet _wallet;
         private GameLoopController _loop;
         private int _multiplier = DefaultMultiplier;

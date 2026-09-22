@@ -6,10 +6,12 @@ namespace RunRich.Player
     public sealed class PlayerView : MonoBehaviour
     {
         private const string GaitParameter = "Gait";
-        private const float NormalAnimationSpeed = 1f;
-        private const float FrozenAnimationSpeed = 0f;
+        private const string ModeParameter = "Mode";
+        private const string SpinParameter = "Spin";
 
         private static readonly int GaitHash = Animator.StringToHash(GaitParameter);
+        private static readonly int ModeHash = Animator.StringToHash(ModeParameter);
+        private static readonly int SpinHash = Animator.StringToHash(SpinParameter);
 
         [SerializeField] private Animator _animator;
         [SerializeField] private WealthTierConfig _tierConfig;
@@ -17,6 +19,8 @@ namespace RunRich.Player
         private SkinnedMeshRenderer[] _outfits;
         private PlayerWallet _wallet;
         private WealthTier _currentTier;
+
+        public int CurrentGaitId => _currentTier == null ? 0 : _currentTier.GaitId;
 
         private SkinnedMeshRenderer[] Outfits =>
             _outfits ??= GetComponentsInChildren<SkinnedMeshRenderer>(true);
@@ -28,9 +32,9 @@ namespace RunRich.Player
             ApplyTier(_wallet.Money);
         }
 
-        public void SetMoving(bool moving)
+        public void SetMode(PlayerAnimationMode mode)
         {
-            _animator.speed = moving ? NormalAnimationSpeed : FrozenAnimationSpeed;
+            _animator.SetInteger(ModeHash, (int)mode);
         }
 
         private void OnDestroy()
@@ -50,9 +54,14 @@ namespace RunRich.Player
             if (tier == null || tier == _currentTier)
                 return;
 
+            bool isChange = _currentTier != null;
             _currentTier = tier;
+
             ShowOutfit(tier.OutfitMesh);
             _animator.SetInteger(GaitHash, tier.GaitId);
+
+            if (isChange)
+                _animator.SetTrigger(SpinHash);
         }
 
         private void ShowOutfit(Mesh outfitMesh)

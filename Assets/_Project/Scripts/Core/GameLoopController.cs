@@ -71,9 +71,19 @@ namespace RunRich.Core
 
         private void ApplyState(GameState state)
         {
-            bool running = state == GameState.Playing;
-            _mover.SetRunning(running);
-            _view.SetMoving(running);
+            _mover.SetRunning(state == GameState.Playing);
+            _view.SetMode(AnimationModeFor(state));
+        }
+
+        private static PlayerAnimationMode AnimationModeFor(GameState state)
+        {
+            switch (state)
+            {
+                case GameState.Playing: return PlayerAnimationMode.Move;
+                case GameState.Win: return PlayerAnimationMode.Win;
+                case GameState.Lose: return PlayerAnimationMode.Defeat;
+                default: return PlayerAnimationMode.Idle;
+            }
         }
     }
 }

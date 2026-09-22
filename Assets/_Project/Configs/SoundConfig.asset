@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c5f52fc0eca6bb4e8ed2086cc12dba9, type: 3}
+  m_Name: SoundConfig
+  m_EditorClassIdentifier: RunRich.Runtime::RunRich.Configs.SoundConfig
+  _moneyPickup:
+  - {fileID: 8300000, guid: 0ad6c4273cf17334f819653b1b6860e9, type: 3}
+  - {fileID: 8300000, guid: 6c076e1638cde8f4a977f403f2d3c458, type: 3}
+  _moneyLoss: {fileID: 8300000, guid: 1e28c23bed91a404e95bebeed9b16faa, type: 3}
+  _gatePositive: {fileID: 8300000, guid: d04842ef24f736340925c356d99ec57c, type: 3}
+  _gateNegative: {fileID: 8300000, guid: 24f0d5e5bd4ad5a489699c726f61c520, type: 3}
+  _finishDoors:
+  - {fileID: 8300000, guid: b168bf1c4cf99b7418d3c93afe448efb, type: 3}
+  - {fileID: 8300000, guid: ae866172db7d4aa4ca7071a5da12fadc, type: 3}
+  - {fileID: 8300000, guid: bda57c1489b11e74a888f25e65d97e0e, type: 3}
+  - {fileID: 8300000, guid: 9f25d0ee7dffece4cb20229d5f95fd15, type: 3}
+  _win: {fileID: 8300000, guid: 2a06f8534989858459079a39cdadd0d3, type: 3}
+  _lose: {fileID: 8300000, guid: 075c30035d417b44b82274adc87f5478, type: 3}
+  _footstepsWalk:
+  - {fileID: 8300000, guid: 4c2b23a374ab4a040835aaf8376de830, type: 3}
+  - {fileID: 8300000, guid: f9e0d974b8d76844dafc7e5aee673bc7, type: 3}
+  - {fileID: 8300000, guid: 01064757837707f4c94f441e3cb01ae1, type: 3}
+  - {fileID: 8300000, guid: 19dc592e46086db47a1faa191584cc5e, type: 3}
+  - {fileID: 8300000, guid: 32d096bec9bed1b4899e706e3bbc745d, type: 3}
+  _footstepsCatWalk:
+  - {fileID: 8300000, guid: e07895c7893715344b2ce9102428eeca, type: 3}
+  - {fileID: 8300000, guid: 6f1f85ad9e1459743b805c9f6fb15834, type: 3}
+  _walkStepDistance: 4.8
+  _catWalkStepDistance: 4
+  _effectVolume: 0.9
+  _footstepVolume: 0.45

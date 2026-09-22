@@ -7,10 +7,12 @@ namespace RunRich.Level
     {
         [SerializeField] private SplineContainer _road;
         [SerializeField] private FinishTrack _finishTrack;
+        [SerializeField] private ChoiceGate[] _gates;
         [SerializeField] private Transform _playerSpawn;
 
         public SplineContainer Road => _road;
         public FinishTrack FinishTrack => _finishTrack;
+        public ChoiceGate[] Gates => _gates;
         public Transform PlayerSpawn => _playerSpawn;
     }
 }
